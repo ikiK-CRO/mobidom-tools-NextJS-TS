@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div>
       <div className={[styles.header, styles.center].join(" ")}>
-        <h1>Hello, Login page!</h1>
+        <h1>Hello, Index/Login page!</h1>
         <Link href="/indexpage">Log in</Link>
       </div>
     </div >
