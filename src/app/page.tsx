@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from 'next/navigation'
 import { FormEvent } from 'react'
+import data from "./users.json"
 
 export default function Home() {
 
@@ -15,6 +16,8 @@ export default function Home() {
     const password = formData.get('password')
 
     console.log(formData)
+    console.log(data)
+
 
     // const response = await fetch('/api/auth/login', {
     //   method: 'POST',
