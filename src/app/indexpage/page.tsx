@@ -2,11 +2,13 @@ import Link from "next/link";
 
 export default function Page() {
   return (
-    <div>
-      <div className="header center">
-        <h1>Hello, 2nd page!</h1>
-        <Link href="/">Back to LogIn</Link>
+    <div className="center ">
+      <div className="header padd">
+        <h1 className="padd">MENU</h1>
+        <Link href="/indexpage/tool1">TOOL 1</Link><br />
+        <Link href="/">ODJAVA</Link>
       </div>
+
     </div >
   );
 }
