@@ -7,16 +7,34 @@ import { FormEvent } from 'react'
 import data from "./users.json"
 
 export default function Home() {
+  const router = useRouter()
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
     const formData = new FormData(event.currentTarget)
-    const email = formData.get('email')
+    const name = formData.get('name')
     const password = formData.get('password')
 
-    console.log(formData)
-    console.log(data)
+    type users = {
+      name: string;
+      password: string;
+    }
+
+    const formDataObj: users = {
+      name: name,
+      password: password
+    }
+
+    // console.log(formDataObj)
+    // console.log(Object.values(data)[0])
+
+    Object.values(data)[0].forEach(e => {
+      console.log(JSON.stringify(e) === JSON.stringify(formDataObj))
+      JSON.stringify(e) === JSON.stringify(formDataObj) ? router.push('/indexpage') : null
+    })
+
+
 
 
     // const response = await fetch('/api/auth/login', {
