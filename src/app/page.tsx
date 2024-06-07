@@ -26,28 +26,11 @@ export default function Home() {
       password: password
     }
 
-    // console.log(formDataObj)
-    // console.log(Object.values(data)[0])
-
     Object.values(data)[0].forEach(e => {
       console.log(JSON.stringify(e) === JSON.stringify(formDataObj))
       JSON.stringify(e) === JSON.stringify(formDataObj) ? router.push('/indexpage') : null
     })
 
-
-
-
-    // const response = await fetch('/api/auth/login', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ email, password }),
-    // })
-
-    // if (response.ok) {
-    //   router.push('/profile')
-    // } else {
-    //   // Handle errors
-    // }
   }
 
 
