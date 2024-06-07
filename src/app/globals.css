@@ -114,3 +114,8 @@ a {
 .center {
   text-align: center;
 }
+
+.center2 {
+  text-align: center;
+  margin: 50px;
+}
