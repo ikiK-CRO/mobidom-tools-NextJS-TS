@@ -7,7 +7,7 @@ export default function Page() {
         <h1>TOOL 1</h1>
         <Link href="/indexpage">NAZAD</Link><br />
       </div>
-      test
+      test2
     </div >
   );
 }
