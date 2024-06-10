@@ -9,13 +9,13 @@ export default function Page() {
   let gettingValue = function gettingValue(data: string, placeholder: string) {
     // console.log(data)
     let arr = data.split("\n")
-    console.log(arr)
-    // console.log(placeholder)
+    // console.log(arr)
+    console.log(placeholder)
     arr.forEach((e, index) => {
       arr[index] = e.replace(/GH\d*-/gi, '').split(/\W+/).join(" ");
-      console.log(e)
+      // console.log(e)
     })
-    console.log(arr)
+    console.log(arr.length)
 
   }
 
