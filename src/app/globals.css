@@ -119,21 +119,28 @@ a {
   text-align: center;
 }
 
-.center2 {
-  text-align: center;
-  margin: auto;
-}
-
-.padd{
+.padd {
   margin: 20px;
 }
 
 .fullFlexContainer {
   display: flex;
-  width:100%;
+  width: 100%;
   height: 100%;
 }
 .full {
   width: 100%;
   height: 100%;
+}
+
+table,
+th,
+td {
+  border: 1px solid white;
+  border-collapse: collapse;
+  padding: 10px;
+}
+
+th {
+  background-color: rgb(69, 67, 67);
 }
