@@ -55,15 +55,18 @@ export default function Page() {
       })
 
 
-      console.log(dobColA)
-      console.log(kupColA)
-
-      dobColA.forEach((dob, index) => {
-        kupColA.forEach((kup, index2) => {
+      // console.log(dobColA)
+      // console.log(kupColA)
+      let res: boolean[] = new Array();
+      dobColA.forEach((dob, dobIndex) => {
+        kupColA.forEach((kup, klupIndex) => {
           const found = dob.some(r => kup.includes(r))
-          console.log(found, index + 1, index2 + 1, dob, kup)
+          if (found) { res.push([found, dobIndex + 1, klupIndex + 1, dob, kup]) }
+          // console.log(found, index + 1, index2 + 1, dob, kup)
         })
       })
+      console.log(res)
+
     }
   }
 
