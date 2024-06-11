@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link";
 import TextareaAutosize from 'react-textarea-autosize';
-import { useEffect, useState } from "react";
+import { AwaitedReactNode, JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, useEffect, useState } from "react";
 
 export default function Page() {
   const [table, setTable] = useState()
@@ -40,25 +40,25 @@ export default function Page() {
 
   }
 
-  let compare = function gettingValue(dat: []) {
+  let compare = function gettingValue(dat: any[]) {
     let res: boolean[] = new Array()
     // console.log(dat)
-    if (dat.some(e => e.col === 'Kupac SKU') && dat.some(e => e.col === 'Kupac traži') && dat.some(e => e.col === 'Dobavljač SKU') && dat.some(e => e.col === 'Dobavljač količina') && dat.some(e => e.col === 'Dobavljač cijena')) {
+    if (dat.some((e: { col: string; }) => e.col === 'Kupac SKU') && dat.some((e: { col: string; }) => e.col === 'Kupac traži') && dat.some((e: { col: string; }) => e.col === 'Dobavljač SKU') && dat.some((e: { col: string; }) => e.col === 'Dobavljač količina') && dat.some((e: { col: string; }) => e.col === 'Dobavljač cijena')) {
 
       // console.log(true)
-      dat.forEach(e => {
-        e.data.forEach((d, index) => {
+      dat.forEach((e) => {
+        e.data.forEach((d: string | any[], index: string | number) => {
           // d.includes(" ") ? console.log(true) : console.log(false)
-          d.includes(" ") ? d = d.split(" ") : d = [d]
+          d.includes(" ") ? d = (d as string).split(" ") : d = [d]
           // console.log(d)
           e.data[index] = d
         })
       })
 
-      let dobColA
-      let kupColA
+      let dobColA: boolean[] = new Array()
+      let kupColA: boolean[] = new Array()
 
-      dat.forEach(e => {
+      dat.forEach((e: { col: string; data: any; }) => {
         if (e.col === 'Dobavljač SKU') {
           dobColA = e.data
         }
@@ -75,7 +75,7 @@ export default function Page() {
 
       dobColA.forEach((dob, dobIndex) => {
         kupColA.forEach((kup, klupIndex) => {
-          const found = dob.some(r => kup.includes(r))
+          const found = dob.some((r: any) => kup.includes(r))
           if (found) { res.push([found, dobIndex + 1, klupIndex + 1, dob, kup]) }
           // console.log(found, index + 1, index2 + 1, dob, kup)
         })
@@ -85,25 +85,25 @@ export default function Page() {
     }
 
     if (res.length > 1) {
-      let kupacTrazi
-      let dobavljacKolicina
-      let dobavljacCijena
+      let kupacTrazi: any[]
+      let dobavljacKolicina: any[]
+      let dobavljacCijena: any[]
 
-      dat.forEach((da, index) => {
+      dat.forEach((da: { col: string; data: any; }, index: any) => {
         if (da.col === 'Kupac traži') {
           kupacTrazi = da.data
           // console.log(da.data)
         }
       })
 
-      dat.forEach((da, index) => {
+      dat.forEach((da: { col: string; data: any; }, index: any) => {
         if (da.col === 'Dobavljač količina') {
           dobavljacKolicina = da.data
           // console.log(da.data)
         }
       })
 
-      dat.forEach((da, index) => {
+      dat.forEach((da: { col: string; data: any; }, index: any) => {
         if (da.col === 'Dobavljač cijena') {
           dobavljacCijena = da.data
           // console.log(da.data)
@@ -151,7 +151,7 @@ export default function Page() {
               <th>Dobavljač količina</th>
               <th>Dobavljač cijena</th>
             </tr>
-            {table ? table.map((val, key) => {
+            {table ? table.map((val: (string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined)[], key: Key | null | undefined) => {
 
               return (
                 <tr key={key}>

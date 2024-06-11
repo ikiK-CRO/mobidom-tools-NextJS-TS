@@ -57,7 +57,7 @@ export default function Home() {
         <h1>Tools</h1>
 
 
-        <div className="center2 padd">
+        <div className="center padd">
           <form onSubmit={handleSubmit}>
             <input type="text" name="name" placeholder="User" required />
             <input type="password" name="password" placeholder="Password" required />
