@@ -4,7 +4,7 @@ import TextareaAutosize from 'react-textarea-autosize';
 
 export default function Page() {
 
-  const columns = ["Kupac kolumna A", "Kupac kolumna B", "Kupac kolumna C", "Dobavljač kolumna A", "Dobavljač kolumna B", "Dobavljač kolumna C"]
+  const columns = ["Kupac SKU", "Kupac traži", "Dobavljač SKU", "Dobavljač količina", "Dobavljač cijena"]
   let dat = []
 
   let gettingValue = function gettingValue(data: string, placeholder: string) {
@@ -26,11 +26,14 @@ export default function Page() {
   }
 
   let compare = function gettingValue(dat: []) {
+    let res: boolean[] = new Array()
     // console.log(dat)
-    if (dat.some(e => e.col === 'Kupac kolumna A') && dat.some(e => e.col === 'Dobavljač kolumna A')) {
+    // if (dat.some(e => e.col === 'Kupac SKU') && dat.some(e => e.col === 'Kupac traži') && dat.some(e => e.col === 'Dobavljač SKU') && dat.some(e => e.col === 'Dobavljač količina') && dat.some(e => e.col === 'Dobavljač cijena')) {
+    if (dat.some(e => e.col === 'Kupac SKU') && dat.some(e => e.col === 'Kupac traži') && dat.some(e => e.col === 'Dobavljač SKU')) {
+
       // console.log(true)
       dat.forEach(e => {
-        // if (e.col === 'Kupac kolumna A') {
+        // if (e.col === 'Kupac SKU') {
         e.data.forEach((d, index) => {
           // d.includes(" ") ? console.log(true) : console.log(false)
           d.includes(" ") ? d = d.split(" ") : d = [d]
@@ -45,19 +48,21 @@ export default function Page() {
       let kupColA
 
       dat.forEach(e => {
-        if (e.col === 'Dobavljač kolumna A') {
+        if (e.col === 'Dobavljač SKU') {
           dobColA = e.data
         }
-        if (e.col === 'Kupac kolumna A') {
+        if (e.col === 'Kupac SKU') {
           kupColA = e.data
         }
 
       })
 
 
+
+
       // console.log(dobColA)
       // console.log(kupColA)
-      let res: boolean[] = new Array();
+
       dobColA.forEach((dob, dobIndex) => {
         kupColA.forEach((kup, klupIndex) => {
           const found = dob.some(r => kup.includes(r))
@@ -65,9 +70,30 @@ export default function Page() {
           // console.log(found, index + 1, index2 + 1, dob, kup)
         })
       })
-      console.log(res)
+      // console.log(res)
 
     }
+
+    if (res.length > 1) {
+      let kupacTrazi
+
+      dat.forEach((da, index) => {
+        if (da.col === 'Kupac traži') {
+          kupacTrazi = da.data
+          // console.log(da.data)
+        }
+      })
+
+      console.log(kupacTrazi)
+
+      res.forEach((re, index) => {
+        let i = (re[2] - 1)
+        re.push(kupacTrazi[i])
+      })
+
+    }
+
+    console.log(res)
   }
 
 
