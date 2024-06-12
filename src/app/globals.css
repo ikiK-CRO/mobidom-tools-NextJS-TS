@@ -115,10 +115,18 @@ th {
 
 .resetBtn{
   background-color: red !important;
-  font-size : 20px;
-  padding: 10px;
+  font-size : 13px;
+  padding: 7px;
   border-radius: 4px;
   border: 2px solid #f8faf9; /* Green */
   box-shadow: 0px 0px 10px #575454;
 }
 
+.copyBtn{
+  background-color: green !important;
+  font-size : 13px;
+  padding: 7px;
+  border-radius: 4px;
+  border: 2px solid #f8faf9; /* Green */
+  box-shadow: 0px 0px 10px #575454;
+}

@@ -10,6 +10,7 @@ import GlobalConifg from '../../app.config.js'
 
 export default function Page() {
 
+
   const goToTop = () => {
     setTimeout(() => {
       // console.log("Delayed for 1 second.")
@@ -32,8 +33,33 @@ export default function Page() {
 
   const columns = ["Kupac SKU", "Kupac traži", "Dobavljač SKU", "Dobavljač količina", "Dobavljač cijena"]
 
+  const [isCopied, setIsCopied] = useState(false);
 
+  const copyTable = () => {
+    const elTable = document.querySelector('table')
+    let range, sel
 
+    if (document.createRange && window.getSelection) {
+      range = document.createRange()
+      sel = window.getSelection()
+      sel.removeAllRanges()
+
+      try {
+        range.selectNodeContents(elTable)
+        sel.addRange(range);
+      } catch (e) {
+        range.selectNode(elTable)
+        sel.addRange(range)
+      }
+      document.execCommand('copy')
+    }
+
+    sel.removeAllRanges();
+    setIsCopied(true);
+    setTimeout(() => {
+      setIsCopied(false);
+    }, 3500);
+  }
 
 
   let gettingValue = function gettingValue(data: string, placeholder: string) {
@@ -164,8 +190,13 @@ export default function Page() {
         <ul className="vertical-menu-3">
           <li><Link href="/indexpage">NAZAD</Link></li>
         </ul>
-        <div className="padd"><button className="resetBtn" onClick={() => handleRealod()}>RESETIRAJ</button></div>
-        <table className="padd center">
+        <div className="padd">
+          <button className="copyBtn padd" onClick={() => copyTable()}><span>{isCopied ? 'KOPIRANO!' : 'KOPIRAJ TABLICU / REZULTATE'}</span></button>
+          <button className="resetBtn padd" onClick={() => handleRealod()}>RESETIRAJ</button>
+        </div>
+
+        <table className="padd center" id="table">
+
           <tbody>
             <tr>
               <th>Kup Red</th>
