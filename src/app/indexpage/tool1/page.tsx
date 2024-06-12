@@ -2,23 +2,40 @@
 import Link from "next/link";
 import TextareaAutosize from 'react-textarea-autosize';
 import { AwaitedReactNode, JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, useEffect, useState } from "react";
+import toast, { Toaster } from 'react-hot-toast';
+import { usePathname, useRouter } from "next/navigation";
+import { FaBeer } from 'react-icons/fa';
 
 export default function Page() {
-  const [table, setTable] = useState()
-
-  const columns = ["Kupac SKU", "Kupac traži", "Dobavljač SKU", "Dobavljač količina", "Dobavljač cijena"]
-  let dat = []
 
   const goToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    })
+    setTimeout(() => {
+      // console.log("Delayed for 1 second.")
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      })
+    }, "500");
+  }
+
+  const [table, setTable] = useState()
+  let dat: any[] = []
+
+  const router = useRouter()
+  const handleRealod = () => {
+    location.reload()
   }
 
 
+
+  const columns = ["Kupac SKU", "Kupac traži", "Dobavljač SKU", "Dobavljač količina", "Dobavljač cijena"]
+
+
+
+
+
   let gettingValue = function gettingValue(data: string, placeholder: string) {
-    goToTop()
+
     // console.log(data)
     let arr = data.split("\n")
     // console.log(arr)
@@ -34,8 +51,8 @@ export default function Page() {
       col: placeholder,
       data: arr
     })
-    // console.log(dat)
 
+    goToTop()
     compare(dat)
 
   }
@@ -124,12 +141,15 @@ export default function Page() {
     // finale
     if (res.length > 1) {
       console.log(res)
-      setTable(res)
+
       res.forEach((e, i) => {
         e[3] = e[3].join(" / ")
         e[4] = e[4].join(" / ")
-
       })
+      toast.success((<><FaBeer /><FaBeer /><FaBeer /><FaBeer /><FaBeer /></>), {
+        duration: 4000
+      })
+      setTable(res)
     }
 
   }
@@ -138,8 +158,11 @@ export default function Page() {
   return (
     <div>
       <div className="header center padd">
-        <h1>USPOREDBA 1</h1>
-        <Link href="/indexpage">NAZAD</Link><br />
+        <h1>USPOREDBA KUPAC-DOBAVLJAČ</h1>
+        <ul className="vertical-menu-3">
+          <li><Link href="/indexpage">NAZAD</Link></li>
+        </ul>
+        <div className="padd"><button className="resetBtn" onClick={() => handleRealod()}>RESETIRAJ</button></div>
         <table className="padd center">
           <tbody>
             <tr>
@@ -170,10 +193,11 @@ export default function Page() {
       </div>
       <div className="fullFlexContainer">
         {columns.map((col, index) =>
-          <TextareaAutosize placeholder={col} key={index} rows={4} cols={20} className="full padd" onChange={(e) => gettingValue(e.target.value, e.target.placeholder)} />
+          <TextareaAutosize placeholder={col} key={index} rows={4} cols={20} className="full padd" onChange={(e) => { gettingValue(e.target.value, e.target.placeholder); e.target.blur() }} />
         )}
 
       </div>
+      <Toaster position="top-right" />
     </div >
   );
 }

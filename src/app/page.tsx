@@ -54,14 +54,14 @@ export default function Home() {
           alt="Logo"
           style={imageStyle}
         />
-        <h1>Tools</h1>
+        <h1>MOBIDOM TOOLS</h1>
 
 
         <div className="center padd">
           <form onSubmit={handleSubmit}>
             <input type="text" name="name" placeholder="User" required />
             <input type="password" name="password" placeholder="Password" required />
-            <button className="padd" type="submit">Login</button>
+            <button className="padd" type="submit">LOGIN</button>
           </form>
         </div>
       </div>
