@@ -7,6 +7,8 @@ import { FormEvent } from 'react'
 import data from "./users.json"
 import toast, { Toaster } from 'react-hot-toast';
 import logo from './logo.png'
+import GlobalConifg from './app.config.js'
+
 
 export default function Home() {
   const router = useRouter()
@@ -65,7 +67,7 @@ export default function Home() {
           </form>
         </div>
       </div>
-      <Toaster position="top-right" />
+      <Toaster position="top-right" toastOptions={GlobalConifg.toastOptGlobalConfig} />
     </div >
   );
 }

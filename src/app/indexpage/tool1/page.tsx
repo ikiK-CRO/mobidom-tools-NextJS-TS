@@ -5,6 +5,8 @@ import { AwaitedReactNode, JSXElementConstructor, Key, ReactElement, ReactNode, 
 import toast, { Toaster } from 'react-hot-toast';
 import { usePathname, useRouter } from "next/navigation";
 import { FaBeer } from 'react-icons/fa';
+import GlobalConifg from '../../app.config.js'
+
 
 export default function Page() {
 
@@ -146,7 +148,7 @@ export default function Page() {
         e[3] = e[3].join(" / ")
         e[4] = e[4].join(" / ")
       })
-      toast.success((<><FaBeer /><FaBeer /><FaBeer /><FaBeer /><FaBeer /></>), {
+      toast.success((<><FaBeer /><FaBeer /><FaBeer /></>), {
         duration: 4000
       })
       setTable(res)
@@ -192,12 +194,12 @@ export default function Page() {
         </table>
       </div>
       <div className="fullFlexContainer">
-        {columns.map((col, index) =>
-          <TextareaAutosize placeholder={col} key={index} rows={4} cols={20} className="full padd" onChange={(e) => { gettingValue(e.target.value, e.target.placeholder); e.target.blur() }} />
+        {columns.map((col, index) => { return (<TextareaAutosize placeholder={col} key={index} rows={4} cols={20} className="full padd" onChange={(e) => { gettingValue(e.target.value, e.target.placeholder); e.target.blur() }} />) }
+
         )}
 
       </div>
-      <Toaster position="top-right" />
+      <Toaster position="top-right" toastOptions={GlobalConifg.toastOptGlobalConfig} />
     </div >
   );
 }

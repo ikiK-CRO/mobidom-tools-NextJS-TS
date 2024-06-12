@@ -119,5 +119,6 @@ th {
   padding: 10px;
   border-radius: 4px;
   border: 2px solid #f8faf9; /* Green */
-  box-shadow: 0px 0px 10px rgb(89, 86, 86);
+  box-shadow: 0px 0px 10px #575454;
 }
+
