@@ -30,11 +30,12 @@ export default function Page() {
   const router = useRouter()
   const handleRealod = () => {
     // location.reload()
-    document.querySelectorAll("textarea").forEach((e) => {
+    document.querySelectorAll("textarea.textPast").forEach((e) => {
       console.log(e)
       e.value = ""
     })
     setTable()
+    toast.success((<FaBeer />))
   }
 
 
@@ -176,15 +177,13 @@ export default function Page() {
     }
     // finale
     if (res.length > 1) {
-      console.log(res)
+      // console.log(res)
 
       res.forEach((e, i) => {
         e[3] = e[3].join(" / ")
         e[4] = e[4].join(" / ")
       })
-      toast.success((<><FaBeer /><FaBeer /><FaBeer /></>), {
-        duration: 4000
-      })
+      toast.success((<FaBeer />))
       setTable(res)
     }
 
@@ -244,7 +243,7 @@ export default function Page() {
               key={index}
               rows={4}
               cols={20}
-              className="full padd"
+              className="full padd textPast"
               onChange={(e) => { gettingValue(e.target.value, e.target.placeholder); e.target.blur() }}
             />
           )
