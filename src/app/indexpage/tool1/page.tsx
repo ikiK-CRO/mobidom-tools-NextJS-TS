@@ -68,6 +68,7 @@ export default function Page() {
     setTimeout(() => {
       setIsCopied(false);
     }, 3500);
+    toast.success((<FaBeer />))
   }
 
 
