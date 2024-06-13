@@ -130,3 +130,7 @@ th {
   border: 2px solid #f8faf9; /* Green */
   box-shadow: 0px 0px 10px #575454;
 }
+
+.labels{
+  margin-left: 15px;
+}

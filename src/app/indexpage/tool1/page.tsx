@@ -218,12 +218,11 @@ export default function Page() {
           <button className="copyBtn padd" onClick={() => copyTable()}><span>{isCopied ? 'KOPIRANO!' : 'KOPIRAJ TABLICU / REZULTATE'}</span></button>
           <button className="resetBtn padd" onClick={() => handleRealod()}>RESETIRAJ</button>
         </div>
-
         <table className="padd center" id="table">
-
+        <caption className="labels">REZULTAT</caption>
           <tbody>
             <tr>
-              <th></th>
+              <th>Rez</th>
               <th>Kup Red</th>
               <th>Kupac SKU</th>
               <th>Kupac traži</th>
@@ -250,6 +249,7 @@ export default function Page() {
           </tbody>
         </table>
       </div>
+      <span className="labels">UNOS:</span>
       <div className="fullFlexContainer">
         {columns.map((col, index) => {
           return (
