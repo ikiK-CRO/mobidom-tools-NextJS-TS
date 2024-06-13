@@ -10,7 +10,6 @@ import GlobalConifg from '../../app.config.js'
 
 export default function Page() {
 
-
   const goToTop = () => {
     setTimeout(() => {
       // console.log("Delayed for 1 second.")
@@ -24,16 +23,15 @@ export default function Page() {
   const [table, setTable] = useState()
   let dat: any[] = []
   const myRefs = useRef([]);
-
-
-
   const router = useRouter()
+
   const handleRealod = () => {
     // location.reload()
     document.querySelectorAll("textarea.textPast").forEach((e) => {
-      console.log(e)
+      // console.log(e)
       e.value = ""
     })
+    dat = []
     setTable()
     toast.success((<FaBeer />))
   }
@@ -41,7 +39,6 @@ export default function Page() {
 
 
   const columns = ["Kupac SKU", "Kupac traži", "Dobavljač SKU", "Dobavljač količina", "Dobavljač cijena"]
-
   const [isCopied, setIsCopied] = useState(false);
 
   const copyTable = () => {
@@ -73,7 +70,6 @@ export default function Page() {
 
 
   let gettingValue = function gettingValue(data: string, placeholder: string) {
-
     // console.log(data)
     let arr = data.split("\n")
     // console.log(arr)
@@ -92,15 +88,24 @@ export default function Page() {
 
     goToTop()
     compare(dat)
-
   }
 
   let compare = function gettingValue(dat: any[]) {
-    let res: boolean[] = new Array()
-    // console.log(dat)
-    if (dat.some((e: { col: string; }) => e.col === 'Kupac SKU') && dat.some((e: { col: string; }) => e.col === 'Kupac traži') && dat.some((e: { col: string; }) => e.col === 'Dobavljač SKU') && dat.some((e: { col: string; }) => e.col === 'Dobavljač količina') && dat.some((e: { col: string; }) => e.col === 'Dobavljač cijena')) {
 
-      // console.log(true)
+    let dobColA: boolean[] = new Array()
+    let kupColA: boolean[] = new Array()
+    let res: boolean[] = new Array()
+    let kupacTrazi: any[]
+    let dobavljacKolicina: any[]
+    let dobavljacCijena: any[]
+
+    // console.log(dat)
+    if (dat.some((e: { col: string; }) => e.col === 'Kupac SKU') &&
+      dat.some((e: { col: string; }) => e.col === 'Kupac traži') &&
+      dat.some((e: { col: string; }) => e.col === 'Dobavljač SKU') &&
+      dat.some((e: { col: string; }) => e.col === 'Dobavljač količina') &&
+      dat.some((e: { col: string; }) => e.col === 'Dobavljač cijena')) {
+
       dat.forEach((e) => {
         e.data.forEach((d: string | any[], index: string | number) => {
           // d.includes(" ") ? console.log(true) : console.log(false)
@@ -110,9 +115,6 @@ export default function Page() {
         })
       })
 
-      let dobColA: boolean[] = new Array()
-      let kupColA: boolean[] = new Array()
-
       dat.forEach((e: { col: string; data: any; }) => {
         if (e.col === 'Dobavljač SKU') {
           dobColA = e.data
@@ -121,49 +123,61 @@ export default function Page() {
           kupColA = e.data
         }
       })
-
-
-
-
       // console.log(dobColA)
       // console.log(kupColA)
 
       dobColA.forEach((dob, dobIndex) => {
-        kupColA.forEach((kup, klupIndex) => {
+        kupColA.forEach((kup, kupIndex) => {
           const found = dob.some((r: any) => kup.includes(r))
-          if (found) { res.push([found, dobIndex + 1, klupIndex + 1, dob, kup]) }
+          if (found) { res.push([found, dobIndex + 1, kupIndex + 1, dob, kup]) }
           // console.log(found, index + 1, index2 + 1, dob, kup)
         })
       })
       // console.log(res)
-
     }
 
     if (res.length > 1) {
-      let kupacTrazi: any[]
-      let dobavljacKolicina: any[]
-      let dobavljacCijena: any[]
-
       dat.forEach((da: { col: string; data: any; }, index: any) => {
         if (da.col === 'Kupac traži') {
           kupacTrazi = da.data
           // console.log(da.data)
         }
-      })
-
-      dat.forEach((da: { col: string; data: any; }, index: any) => {
         if (da.col === 'Dobavljač količina') {
           dobavljacKolicina = da.data
           // console.log(da.data)
         }
-      })
-
-      dat.forEach((da: { col: string; data: any; }, index: any) => {
         if (da.col === 'Dobavljač cijena') {
           dobavljacCijena = da.data
           // console.log(da.data)
         }
       })
+
+
+      if (kupColA.length != kupacTrazi.length) {
+        toast.error('Kolone KUPCA nisu iste dužine! \n \nObe kolone SKU i traži moraju imati isti broj redova!', {
+          duration: 20000,
+        })
+        setTimeout(() => handleRealod(), 4000)
+        console.log(kupColA)
+        console.log(kupacTrazi)
+        return
+      }
+
+      const cheakDobArr = [
+        dobavljacKolicina,
+        dobavljacCijena,
+        dobColA
+      ]
+      // console.log(cheakDobArr)
+      if (!cheakDobArr.every((val, i, a) => val.length === a[0].length)) {
+        toast.error('Kolone DOBAVLJAČA nisu iste dužine!\n \nSve 3 kolone SKU, količina i cijena moraju imati isti broj redova!', {
+          duration: 20000,
+        })
+        setTimeout(() => handleRealod(), 4000)
+        console.log(cheakDobArr)
+        return
+      }
+
 
       // console.log(kupacTrazi)
       res.forEach((re, index) => {
@@ -176,10 +190,13 @@ export default function Page() {
       })
 
     }
+
+
+    // console.log(res)
+
     // finale
     if (res.length > 1) {
       // console.log(res)
-
       res.forEach((e, i) => {
         e[3] = e[3].join(" / ")
         e[4] = e[4].join(" / ")
@@ -187,7 +204,6 @@ export default function Page() {
       toast.success((<FaBeer />))
       setTable(res)
     }
-
   }
 
 
