@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link";
 import TextareaAutosize from 'react-textarea-autosize';
-import { AwaitedReactNode, JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, useEffect, useState } from "react";
+import { AwaitedReactNode, JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, useEffect, useRef, useState } from "react";
 import toast, { Toaster } from 'react-hot-toast';
 import { usePathname, useRouter } from "next/navigation";
 import { FaBeer } from 'react-icons/fa';
@@ -23,10 +23,18 @@ export default function Page() {
 
   const [table, setTable] = useState()
   let dat: any[] = []
+  const myRefs = useRef([]);
+
+
 
   const router = useRouter()
   const handleRealod = () => {
-    location.reload()
+    // location.reload()
+    document.querySelectorAll("textarea").forEach((e) => {
+      console.log(e)
+      e.value = ""
+    })
+    setTable()
   }
 
 
@@ -199,6 +207,7 @@ export default function Page() {
 
           <tbody>
             <tr>
+              <th></th>
               <th>Kup Red</th>
               <th>Kupac SKU</th>
               <th>Kupac traži</th>
@@ -211,6 +220,7 @@ export default function Page() {
 
               return (
                 <tr key={key}>
+                  <td>{key + 1}</td>
                   <td>{val[2]}</td>
                   <td>{val[4]}</td>
                   <td>{val[5]}</td>
@@ -225,8 +235,20 @@ export default function Page() {
         </table>
       </div>
       <div className="fullFlexContainer">
-        {columns.map((col, index) => { return (<TextareaAutosize placeholder={col} key={index} rows={4} cols={20} className="full padd" onChange={(e) => { gettingValue(e.target.value, e.target.placeholder); e.target.blur() }} />) }
-
+        {columns.map((col, index) => {
+          return (
+            <TextareaAutosize
+              id={"textBox" + index}
+              ref={el => (myRefs.current[index] = el)}
+              placeholder={col}
+              key={index}
+              rows={4}
+              cols={20}
+              className="full padd"
+              onChange={(e) => { gettingValue(e.target.value, e.target.placeholder); e.target.blur() }}
+            />
+          )
+        }
         )}
 
       </div>
