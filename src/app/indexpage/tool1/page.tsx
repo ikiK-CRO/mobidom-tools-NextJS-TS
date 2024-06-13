@@ -22,7 +22,7 @@ export default function Page() {
 
   const [table, setTable] = useState()
   let dat: any[] = []
-  const myRefs = useRef([]);
+  // const myRefs = useRef([]);
   const router = useRouter()
 
   const handleRealod = () => {
@@ -158,8 +158,8 @@ export default function Page() {
           duration: 20000,
         })
         setTimeout(() => handleRealod(), 4000)
-        console.log(kupColA)
-        console.log(kupacTrazi)
+        // console.log(kupColA)
+        // console.log(kupacTrazi)
         return
       }
 
@@ -174,7 +174,7 @@ export default function Page() {
           duration: 20000,
         })
         setTimeout(() => handleRealod(), 4000)
-        console.log(cheakDobArr)
+        // console.log(cheakDobArr)
         return
       }
 
@@ -255,7 +255,7 @@ export default function Page() {
           return (
             <TextareaAutosize
               id={"textBox" + index}
-              ref={el => (myRefs.current[index] = el)}
+              // ref={el => (myRefs.current[index] = el)}
               placeholder={col}
               key={index}
               rows={4}
