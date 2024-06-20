@@ -20,11 +20,19 @@ export default function Page() {
     }, "500");
   }
 
+
+
+  
   const [table, setTable] = useState()
   const [tableCount, setTableCount] = useState()
   let dat: any[] = []
   // const myRefs = useRef([]);
   const router = useRouter()
+  const columns = ["Kupac SKU", "Kupac traži", "Dobavljač SKU", "Dobavljač količina", "Dobavljač cijena"]
+  const [isCopied, setIsCopied] = useState(false);
+
+
+
 
   const handleRealod = () => {
     // location.reload()
@@ -37,11 +45,6 @@ export default function Page() {
     setTableCount()
     toast.success((<FaBeer />))
   }
-
-
-
-  const columns = ["Kupac SKU", "Kupac traži", "Dobavljač SKU", "Dobavljač količina", "Dobavljač cijena"]
-  const [isCopied, setIsCopied] = useState(false);
 
   const copyTable = () => {
     const elTable = document.querySelector('table')
