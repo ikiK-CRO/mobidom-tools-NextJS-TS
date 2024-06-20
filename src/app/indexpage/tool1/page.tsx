@@ -10,19 +10,7 @@ import GlobalConifg from '../../app.config.js'
 
 export default function Page() {
 
-  const goToTop = () => {
-    setTimeout(() => {
-      // console.log("Delayed for 1 second.")
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-      })
-    }, "500");
-  }
 
-
-
-  
   const [table, setTable] = useState()
   const [tableCount, setTableCount] = useState()
   let dat: any[] = []
@@ -33,6 +21,15 @@ export default function Page() {
 
 
 
+  const goToTop = () => {
+    setTimeout(() => {
+      // console.log("Delayed for 1 second.")
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      })
+    }, "500");
+  }
 
   const handleRealod = () => {
     // location.reload()
