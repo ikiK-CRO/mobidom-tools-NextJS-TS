@@ -21,6 +21,7 @@ export default function Page() {
   }
 
   const [table, setTable] = useState()
+  const [tableCount, setTableCount] = useState()
   let dat: any[] = []
   // const myRefs = useRef([]);
   const router = useRouter()
@@ -33,6 +34,7 @@ export default function Page() {
     })
     dat = []
     setTable()
+    setTableCount()
     toast.success((<FaBeer />))
   }
 
@@ -194,15 +196,28 @@ export default function Page() {
 
     // console.log(res)
 
+
     // finale
-    if (res.length > 1) {
+    if (res.length >= 1) {
+      setTableCount(res.length)
       // console.log(res)
       res.forEach((e, i) => {
         e[3] = e[3].join(" / ")
         e[4] = e[4].join(" / ")
       })
+
+      let finale = []
+      kupColA.forEach((e, i) => {
+        finale.push([["-"], ["-"], ["-"], ["-"], ["-"], ["-"], ["-"],["-"]])
+      })
+      // console.log(finale)
+
+      res.forEach((e, i) => {
+        finale[e[2]-1] = e
+      })
+
+      setTable(finale.toSorted((a, b) => a[2] - b[2]))
       toast.success((<FaBeer />))
-      setTable(res)
     }
   }
 
@@ -219,10 +234,10 @@ export default function Page() {
           <button className="resetBtn padd" onClick={() => handleRealod()}>RESETIRAJ</button>
         </div>
         <table className="padd center" id="table">
-        <caption className="labels">REZULTAT</caption>
+          <caption className="labels padd">REZULTAT: <b className="orange">{tableCount ? tableCount + " pogodaka" : null}</b> </caption>
           <tbody>
             <tr>
-              <th>Rez</th>
+              <th>Red</th>
               <th>Kup Red</th>
               <th>Kupac SKU</th>
               <th>Kupac traži</th>
